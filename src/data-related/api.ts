@@ -1,17 +1,17 @@
+import axios from 'axios';
 import { CURRENCY_API_URL, API_KEY , CURRENCY_WEBSOCKET_URL } from "../env";
 import WebSocket from "ws";
 
 //Get Crypto Data From The REST API
 async function fetchAPI(API_URL: string) {
-    try {
-        const response = await fetch(API_URL);
-        if (!response.ok) throw new Error('Request failed');
-        const data = await response.json();
-        return data;
-    } catch (error: any) {
-        throw new Error(error.message);
-    }
+  try {
+    const response = await axios.get(API_URL);
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
 }
+
 
 //Sort Data From The REST API
 function organizePriceData(data: any[]) {

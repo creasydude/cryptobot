@@ -18,6 +18,7 @@ async function ApplicationStart() {
     let closePricesArrFromAPI = data.getClosePricesArr();
     const ws = startWs()
     getMsgWs(ws,closePricesArrFromAPI, calculateFn);
+    console.log("Bot Running Successfuly.");
 
     setInterval(async () => {
       data = await getData();
