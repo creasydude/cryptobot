@@ -4,7 +4,7 @@ import TelegramBot from "node-telegram-bot-api";
 let isBotActive = true;
 const botToken = TELEGRAM_BOT_TOKEN!;
 const ownerChatId = TELEGRAM_OWNER_CHAT_ID!;
-const TBot = new TelegramBot(botToken);
+const TBot = new TelegramBot(botToken, { polling: true });
 TBot.onText(/\/start/, (msg) => {
     isBotActive = true;
     //If You Want You Can Make Bot Public But I Use Owner Chat Id Hard Coded
