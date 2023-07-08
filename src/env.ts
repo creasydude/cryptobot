@@ -1,10 +1,9 @@
-export const CURRENCY_API_URL : string = "https://min-api.cryptocompare.com/data/v2/histominute?fsym=BTC&tsym=USDT&limit=400&aggregate=30";
-// export const CURRENCY_API_URL : string = "https://min-api.cryptocompare.com/data/v2/histominute?fsym=BTC&tsym=USDT&limit=10&aggregate=1";
-export const CURRENCY_WEBSOCKET_URL : string = "wss://streamer.cryptocompare.com/v2?api_key="
-export const TIME_FRAME : string = "30Min";
-export const TIME_FRAME_IN_MS : number = 1800000;
+export const CURRENCY_API_URL : string | undefined = process.env.CURRENCY_API_URL
+export const CURRENCY_WEBSOCKET_URL : string | undefined = process.env.CURRENCY_WEBSOCKET_URL
+export const TIME_FRAME : string | undefined = process.env.TIME_FRAME
+export const TIME_FRAME_IN_MS : string | undefined = process.env.TIME_FRAME_IN_MS
 
-export const API_KEY: string = "29c9c260a289ea952806f25cbbce0af4444c1bf5b2449c382d765a1e7e53fe74";
-export const TELEGRAM_BOT_TOKEN: string = "6026266154:AAEGbzNkqyXCXtfLDPzC4H2mHHKyc9KrQD0";
-export const TELEGRAM_OWNER_CHAT_ID: string = "833748478";
-export const CRYPTO_PAIR : string = "BTC/USDT"
+export const API_KEY: string | undefined = process.env.API_KEY
+export const TELEGRAM_BOT_TOKEN: string | undefined = process.env.TELEGRAM_BOT_TOKEN
+export const TELEGRAM_OWNER_CHAT_ID: string | undefined = process.env.TELEGRAM_OWNER_CHAT_ID
+export const CRYPTO_PAIR : string | undefined = process.env.CRYPTO_PAIR
