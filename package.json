@@ -1,0 +1,24 @@
+{
+  "name": "cryptobot",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node ./build/server.js",
+    "build": "tsc -p .",
+    "dev": "nodemon ./src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node-telegram-bot-api": "^0.61.6",
+    "@types/ws": "^8.5.5",
+    "nodemon": "^1.19.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.61.0",
+    "ws": "^8.13.0"
+  }
+}
