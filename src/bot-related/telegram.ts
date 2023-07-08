@@ -2,8 +2,8 @@ import { TELEGRAM_BOT_TOKEN, TELEGRAM_OWNER_CHAT_ID } from "../env";
 import TelegramBot from "node-telegram-bot-api";
 
 let isBotActive = true;
-const botToken = TELEGRAM_BOT_TOKEN;
-const ownerChatId = TELEGRAM_OWNER_CHAT_ID;
+const botToken = TELEGRAM_BOT_TOKEN!;
+const ownerChatId = TELEGRAM_OWNER_CHAT_ID!;
 const TBot = new TelegramBot(botToken, { polling: true });
 TBot.onText(/\/start/, (msg) => {
     isBotActive = true;
