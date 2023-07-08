@@ -18,13 +18,13 @@ This Bot Made With `cryptocompare.com` API , So if You Want To Use It Go To This
 
 [My Resume](https://creasy.ir/)
 
-####Usage And Run
+#### Usage And Run
 
 `$ npm run dev` For Development
 `$ npm run build` For Build From Ts To Js
 `$ npm start` For Run Builded Js Script
 
-####Enviroments
+#### Enviroments
 
 In the `src` Folder It Is A File Names `env.ts` Just Edit It Or Install `dotenv` And Add This In An Enviroment File `.env` Its Your Choice.
 
