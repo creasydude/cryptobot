@@ -23,7 +23,7 @@ async function ApplicationStart() {
       data = await getData();
       closePricesArrFromAPI = data.getClosePricesArr();
       getMsgWs(ws,closePricesArrFromAPI, calculateFn);
-    }, updateMinutes);
+    }, updateMinutes!);
     
 
   } catch (error) {

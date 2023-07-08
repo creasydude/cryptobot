@@ -37,7 +37,7 @@ function convertToTimezones(unixTimestamp: string) {
 
 //Final Function To Return All Of Data We Need From REST API
 async function getData(): Promise<GetDataReturn> {
-    const API_URL = CURRENCY_API_URL;
+    const API_URL = CURRENCY_API_URL!;
     let fetchDataFromAPI = await fetchAPI(API_URL);
 
     const priceDataFromApi = fetchDataFromAPI?.Data?.Data;
@@ -62,8 +62,8 @@ async function getData(): Promise<GetDataReturn> {
 }
 
 function startWs() {
-  let apiKey = API_KEY;
-  let wsURL = CURRENCY_WEBSOCKET_URL;
+  let apiKey = API_KEY!;
+  let wsURL = CURRENCY_WEBSOCKET_URL!;
   const ccStreamer = new WebSocket(wsURL + apiKey);
   const subRequest = {
     action: "SubAdd",
