@@ -105,7 +105,7 @@ function crossEMA(prices: string[], botFn: Function, longEMA?: number, shortEMA?
     // }
   } else {
     //Nothing Signal
-    return null;
+    // return null;
     console.log({
       signal: signals[2],
       priceLastOne,
