@@ -1,4 +1,4 @@
-import { CRYPTO_PAIR , TIME_FRAME} from "../env";
+import { CRYPTO_PAIR, TIME_FRAME } from "../env";
 
 function calculateEMA(prices: string[] | number[], period: number, smoothing?: number) {
   //*Good Smoothing For MACD : 2
@@ -12,7 +12,7 @@ function calculateEMA(prices: string[] | number[], period: number, smoothing?: n
   //Add smoothing factor
   const multiplier = (smoothing || 2) / (period + 1);
 
-  const ema : any[] = [];
+  const ema: any[] = [];
   let emaPrev = numberPrices[0];
   ema.push(emaPrev);
 
@@ -106,6 +106,16 @@ function crossEMA(prices: string[], botFn: Function, longEMA?: number, shortEMA?
   } else {
     //Nothing Signal
     return null;
+    console.log({
+      signal: signals[2],
+      priceLastOne,
+      fastEMALastOne,
+      slowEMALastOne,
+      fastEMALastMinus,
+      slowEMALastMinus,
+      ema200LastOne,
+      macdLastOne
+    });
     // return {
     //   signal: signals[2],
     //   priceLastOne,
