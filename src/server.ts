@@ -32,18 +32,18 @@ async function ApplicationStart() {
   }
 }
 
-ApplicationStart();
+// ApplicationStart();
 
 //This Is For Websites Like Render Ignore it
 import http from "http"
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = Number(process.env.PORT) || 3000;
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, World!\n');
+  res.end('Bot Running!\n');
 });
-
 server.listen(port, hostname, () => {
+  ApplicationStart();
   console.log(`Server running at http://${hostname}:${port}/`);
 });
