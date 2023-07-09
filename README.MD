@@ -36,7 +36,8 @@ In the `src` Folder It Is A File Names `env.ts` Just Edit It Or Install `dotenv`
 | TIME_FRAME_IN_MS   | Time Frame You Use In Miliseconds For Example For 30 Min Time Frame Write `1800000`
 | API_KEY   | API KEY You Get From Cryptocompare Website |
 | TELEGRAM_BOT_TOKEN   | The TOKEN Of Your Bot Make With Bot Father In Telegram |
-| TELEGRAM_OWNER_CHAT_ID   | Chat Id Of Your Telegram Account You Can Get It From `@C_ID_BOT`
-| CRYPTO_PAIR    | The Crypto Pair You Want Use Like Time Frame You Should Sync With API URL So I Use `BTC/USDT`
+| TELEGRAM_OWNER_CHAT_ID   | Chat Id Of Your Telegram Account You Can Get It From `@C_ID_BOT` |
+| CRYPTO_PAIR    | The Crypto Pair You Want Use Like Time Frame You Should Sync With API URL So I Use `BTC/USDT` |
+| WEB_DEPLOY    | If You Want Deploy This To Webhostings Set It To `true` else not set or set it `false` |
 
 ### Good Luck
