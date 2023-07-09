@@ -26,7 +26,7 @@ function calculateFn(prices) {
 function ApplicationStart() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const updateMinutes = env_1.TIME_FRAME_IN_MS;
+            const updateMinutes = Number(env_1.TIME_FRAME_IN_MS);
             let data = yield (0, api_1.getData)();
             let closePricesArrFromAPI = data.getClosePricesArr();
             const ws = (0, api_1.startWs)();
