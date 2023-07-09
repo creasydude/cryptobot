@@ -14,7 +14,7 @@ function calculateFn(prices: string[]) {
 
 async function ApplicationStart() {
   try {
-    const updateMinutes = TIME_FRAME_IN_MS;
+    const updateMinutes = Number(TIME_FRAME_IN_MS);
     let data = await getData();
     let closePricesArrFromAPI = data.getClosePricesArr();
     const ws = startWs()
