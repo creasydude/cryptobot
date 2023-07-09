@@ -41,9 +41,9 @@ if (WEB_DEPLOY === "true") {
     res.status(200).send("Bot Is Working.")
   });
   app.listen(PORT, function () {
-    ApplicationStart();
+    // ApplicationStart();
     console.log(`🚀 WebServer Running On Port :${PORT}`);
   });
 } else {
-  ApplicationStart();
+  // ApplicationStart();
 }
