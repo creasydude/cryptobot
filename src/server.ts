@@ -4,34 +4,34 @@ import crossEMA from "./data-related/calculate";
 import BotSendMsg from "./bot-related/telegram";
 import express , {Request , Response} from 'express'
 
-// function botFn(message: string) {
-//   return BotSendMsg(message)
-// }
+function botFn(message: string) {
+  return BotSendMsg(message)
+}
 
-// function calculateFn(prices: string[]) {
-//   return crossEMA(prices, botFn);
-// }
+function calculateFn(prices: string[]) {
+  return crossEMA(prices, botFn);
+}
 
-// async function ApplicationStart() {
-//   try {
-//     const updateMinutes = TIME_FRAME_IN_MS;
-//     let data = await getData();
-//     let closePricesArrFromAPI = data.getClosePricesArr();
-//     const ws = startWs()
-//     getMsgWs(ws,closePricesArrFromAPI, calculateFn);
-//     console.log("Bot Running Successfuly.");
+async function ApplicationStart() {
+  try {
+    const updateMinutes = TIME_FRAME_IN_MS;
+    let data = await getData();
+    let closePricesArrFromAPI = data.getClosePricesArr();
+    const ws = startWs()
+    getMsgWs(ws,closePricesArrFromAPI, calculateFn);
+    console.log("Bot Running Successfuly.");
 
-//     setInterval(async () => {
-//       data = await getData();
-//       closePricesArrFromAPI = data.getClosePricesArr();
-//       getMsgWs(ws,closePricesArrFromAPI, calculateFn);
-//     }, updateMinutes!);
+    setInterval(async () => {
+      data = await getData();
+      closePricesArrFromAPI = data.getClosePricesArr();
+      getMsgWs(ws,closePricesArrFromAPI, calculateFn);
+    }, updateMinutes!);
     
 
-//   } catch (error) {
-//     console.error("An error occurred:", error);
-//   }
-// }
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+}
 
 //This Is For Free Hostings Deploy Set "WEB_DEPLOY" VAR FALSE
 if (WEB_DEPLOY === "true") {
@@ -41,9 +41,9 @@ if (WEB_DEPLOY === "true") {
     res.status(200).send("Bot Is Working.")
   });
   app.listen(PORT, function () {
-    // ApplicationStart();
+    ApplicationStart();
     console.log(`🚀 WebServer Running On Port :${PORT}`);
   });
 } else {
-  // ApplicationStart();
+  ApplicationStart();
 }
