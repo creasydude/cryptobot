@@ -1,7 +1,8 @@
-import { TIME_FRAME_IN_MS } from "./env";
+import { TIME_FRAME_IN_MS , WEB_DEPLOY} from "./env";
 import { getData, getMsgWs , startWs } from "./data-related/api";
 import crossEMA from "./data-related/calculate";
 import BotSendMsg from "./bot-related/telegram";
+import express , {Request , Response} from 'express'
 
 function botFn(message: string) {
   return BotSendMsg(message)
@@ -32,18 +33,17 @@ async function ApplicationStart() {
   }
 }
 
-// ApplicationStart();
-
-//This Is For Websites Like Render Ignore it
-import http from "http"
-const hostname = '127.0.0.1';
-const port = Number(process.env.PORT) || 3000;
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Bot Running!\n');
-});
-server.listen(port, hostname, () => {
+//This Is For Free Hostings Deploy Set "WEB_DEPLOY" VAR FALSE
+if (WEB_DEPLOY === "true") {
+  const PORT = <string>process.env.PORT || "5000";
+  const app = express()
+  app.get("/",function (req : Request,res : Response) {
+    res.status(200).send("Bot Is Working.")
+  });
+  app.listen(PORT, function () {
+    ApplicationStart();
+    console.log(`🚀 WebServer Running On Port :${PORT}`);
+  });
+} else {
   ApplicationStart();
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+}

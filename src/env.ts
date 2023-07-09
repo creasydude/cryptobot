@@ -7,3 +7,4 @@ export const API_KEY: string | undefined = process.env.API_KEY
 export const TELEGRAM_BOT_TOKEN: string | undefined = process.env.TELEGRAM_BOT_TOKEN
 export const TELEGRAM_OWNER_CHAT_ID: string | undefined = process.env.TELEGRAM_OWNER_CHAT_ID
 export const CRYPTO_PAIR : string | undefined = process.env.CRYPTO_PAIR
+export const WEB_DEPLOY : string | undefined = process.env.WEB_DEPLOY
