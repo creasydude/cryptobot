@@ -17,12 +17,21 @@ const api_1 = require("./data-related/api");
 const calculate_1 = __importDefault(require("./data-related/calculate"));
 const telegram_1 = __importDefault(require("./bot-related/telegram"));
 const express_1 = __importDefault(require("express"));
+//Function To Send Msg (Limit Messages Bot Can Send 1 In 5 Mins)
+let lastMessageTime = 0;
 function botFn(message) {
-    return (0, telegram_1.default)(message);
+    const currentTime = Date.now();
+    const interrupt = 300000; // 5 minutes in milliseconds
+    if (currentTime - lastMessageTime >= interrupt) {
+        lastMessageTime = currentTime;
+        (0, telegram_1.default)(message);
+    }
 }
+//Calculate Function
 function calculateFn(prices) {
     return (0, calculate_1.default)(prices, botFn);
 }
+//Function Of Start Application
 function ApplicationStart() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -43,7 +52,7 @@ function ApplicationStart() {
         }
     });
 }
-//This Is For Free Hostings Deploy Set "WEB_DEPLOY" VAR FALSE
+// This Is For Free Hostings Deploy Set "WEB_DEPLOY" Enviuroment False
 if (env_1.WEB_DEPLOY === "true") {
     const PORT = process.env.PORT || "5000";
     const app = (0, express_1.default)();

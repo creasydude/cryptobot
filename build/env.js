@@ -1,6 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WEB_DEPLOY = exports.CRYPTO_PAIR = exports.TELEGRAM_OWNER_CHAT_ID = exports.TELEGRAM_BOT_TOKEN = exports.API_KEY = exports.TIME_FRAME_IN_MS = exports.TIME_FRAME = exports.CURRENCY_WEBSOCKET_URL = exports.CURRENCY_API_URL = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+//Enviroments
 exports.CURRENCY_API_URL = process.env.CURRENCY_API_URL;
 exports.CURRENCY_WEBSOCKET_URL = process.env.CURRENCY_WEBSOCKET_URL;
 exports.TIME_FRAME = process.env.TIME_FRAME;

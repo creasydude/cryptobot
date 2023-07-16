@@ -2,21 +2,30 @@ import { TELEGRAM_BOT_TOKEN, TELEGRAM_OWNER_CHAT_ID } from "../env";
 import TelegramBot from "node-telegram-bot-api";
 
 let isBotActive = true;
+let isStartActive = false;
 const botToken = TELEGRAM_BOT_TOKEN!;
 const ownerChatId = TELEGRAM_OWNER_CHAT_ID!;
 const TBot = new TelegramBot(botToken, { polling: true });
 TBot.onText(/\/start/, (msg) => {
-    isBotActive = true;
-    //If You Want You Can Make Bot Public But I Use Owner Chat Id Hard Coded
-    // const chatId = msg.chat.id;
-    TBot.sendMessage(ownerChatId, "You Started Bot Successfuly , ASAP You Will Gain Your Signals.")
+    isBotActive = true; // Update the bot status to started
+    //I Use Bot Private And My Chat Id
+    if (!isStartActive) {
+        TBot.sendMessage(ownerChatId, "You Started Bot Successfuly , ASAP You Will Gain Your Signals.")
+        isStartActive = true;
+    } else {
+        TBot.sendMessage(ownerChatId, "Bot Is Already Active!")
+    }
 });
 
 TBot.onText(/\/stop/, (msg) => {
-    //If You Want You Can Make Bot Public But I Use Owner Chat Id Hard Coded
-    // const chatId = msg.chat.id;
-    TBot.sendMessage(ownerChatId, 'Bot Activities Stopped Successfuly.');
     isBotActive = false; // Update the bot status to stopped
+    //I Use Bot Private And My Chat Id
+    if (isStartActive) {
+        TBot.sendMessage(ownerChatId, 'Bot Activities Stopped Successfuly.');
+    } else {
+        TBot.sendMessage(ownerChatId, 'Bot Already Stopped.');
+        isStartActive = false;
+    }
 });
 
 //Make Functions To Use Bot
