@@ -17,6 +17,7 @@ const api_1 = require("./data-related/api");
 const calculate_1 = __importDefault(require("./data-related/calculate"));
 const telegram_1 = __importDefault(require("./bot-related/telegram"));
 const express_1 = __importDefault(require("express"));
+const axios_1 = __importDefault(require("axios"));
 //Function To Send Msg (Limit Messages Bot Can Send 1 In 5 Mins)
 let lastMessageTime = 0;
 function botFn(message) {
@@ -30,6 +31,10 @@ function botFn(message) {
 //Calculate Function
 function calculateFn(prices) {
     return (0, calculate_1.default)(prices, botFn);
+}
+//Function To Keep Alive The App In Free Backend Services
+function keepAlive(appUrl) {
+    axios_1.default.get(appUrl).then(res => console.log(`Keep Alive Function Successfuly Executed. Status Code :${res.status}, Status Text : ${res.statusText}.`)).catch((err) => console.log(err));
 }
 //Function Of Start Application
 function ApplicationStart() {
@@ -63,6 +68,9 @@ if (env_1.WEB_DEPLOY === "true") {
         ApplicationStart();
         console.log(`🚀 WebServer Running On Port :${PORT}`);
     });
+    setInterval(() => {
+        keepAlive(env_1.WEB_URL);
+    }, 30 * 1000);
 }
 else {
     ApplicationStart();
