@@ -7,6 +7,10 @@ const TBot = new TelegramBot(botToken, { polling: true });
 
 let isBotActive = true;
 
+function resetBotActive() {
+    isBotActive = true;
+}
+
 TBot.onText(/\/start/, (msg) => {
     if (isBotActive) {
         TBot.sendMessage(ownerChatId, "You Started Bot Successfully. ASAP You Will Receive Your Signals.");
@@ -18,6 +22,7 @@ TBot.onText(/\/start/, (msg) => {
 TBot.onText(/\/stop/, (msg) => {
     if (isBotActive) {
         TBot.sendMessage(ownerChatId, "Bot activities stopped successfully.");
+        resetBotActive();
     } else {
         TBot.sendMessage(ownerChatId, "Bot is already stopped.");
     }
