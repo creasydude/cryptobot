@@ -1,39 +1,32 @@
-import { TELEGRAM_BOT_TOKEN, TELEGRAM_OWNER_CHAT_ID } from "../env";
 import TelegramBot from "node-telegram-bot-api";
+import { TELEGRAM_BOT_TOKEN, TELEGRAM_OWNER_CHAT_ID } from "../env";
 
-let isBotActive = true;
-let isStartActive = false;
 const botToken = TELEGRAM_BOT_TOKEN!;
 const ownerChatId = TELEGRAM_OWNER_CHAT_ID!;
 const TBot = new TelegramBot(botToken, { polling: true });
+
+let isBotActive = true;
+
 TBot.onText(/\/start/, (msg) => {
-    isBotActive = true; // Update the bot status to started
-    //I Use Bot Private And My Chat Id
-    if (!isStartActive) {
-        TBot.sendMessage(ownerChatId, "You Started Bot Successfuly , ASAP You Will Gain Your Signals.")
-        isStartActive = true;
+    if (isBotActive) {
+        TBot.sendMessage(ownerChatId, "You Started Bot Successfully. ASAP You Will Receive Your Signals.");
     } else {
-        TBot.sendMessage(ownerChatId, "Bot Is Already Active!")
+        TBot.sendMessage(ownerChatId, "Bot is already active!");
     }
 });
 
 TBot.onText(/\/stop/, (msg) => {
-    isBotActive = false; // Update the bot status to stopped
-    //I Use Bot Private And My Chat Id
-    if (isStartActive) {
-        TBot.sendMessage(ownerChatId, 'Bot Activities Stopped Successfuly.');
+    if (isBotActive) {
+        TBot.sendMessage(ownerChatId, "Bot activities stopped successfully.");
     } else {
-        TBot.sendMessage(ownerChatId, 'Bot Already Stopped.');
-        isStartActive = false;
+        TBot.sendMessage(ownerChatId, "Bot is already stopped.");
     }
+    isBotActive = false;
 });
 
-//Make Functions To Use Bot
 function BotSendMsg(message: string) {
     if (isBotActive) {
         TBot.sendMessage(ownerChatId, message);
-    } else {
-        return
     }
 }
 
