@@ -1,8 +1,9 @@
-import { TIME_FRAME_IN_MS, WEB_DEPLOY } from "./env";
+import { TIME_FRAME_IN_MS, WEB_DEPLOY, WEB_URL } from "./env";
 import { getData, getMsgWs, startWs } from "./data-related/api";
 import crossEMA from "./data-related/calculate";
 import BotSendMsg from "./bot-related/telegram";
-import express, { Request, Response } from 'express'
+import express, { Request, Response } from 'express';
+import request from "request";
 
 //Function To Send Msg (Limit Messages Bot Can Send 1 In 5 Mins)
 let lastMessageTime = 0;
@@ -19,6 +20,17 @@ function botFn(message: string) {
 //Calculate Function
 function calculateFn(prices: string[]) {
   return crossEMA(prices, botFn);
+}
+
+//Function To Keep Alive The App In Free Backend Services
+function keepAlive(appUrl: string) {
+  request(appUrl, function (error: any, response: any, body: any) {
+    if (!error) {
+      console.log("Keeping App Alive.");
+    } else {
+      console.log(error);
+    }
+  })
 }
 
 //Function Of Start Application
@@ -54,6 +66,9 @@ if (WEB_DEPLOY === "true") {
     ApplicationStart();
     console.log(`🚀 WebServer Running On Port :${PORT}`);
   });
+  setInterval(() => {
+    keepAlive(WEB_URL)
+  }, 30 * 1000)
 } else {
   ApplicationStart();
 }

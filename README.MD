@@ -38,6 +38,7 @@ In the `src` Folder It Is A File Names `env.ts` Just Edit It Or Install `dotenv`
 | TELEGRAM_BOT_TOKEN   | The TOKEN Of Your Bot Make With Bot Father In Telegram |
 | TELEGRAM_OWNER_CHAT_ID   | Chat Id Of Your Telegram Account You Can Get It From `@C_ID_BOT` |
 | CRYPTO_PAIR    | The Crypto Pair You Want Use Like Time Frame You Should Sync With API URL So I Use `BTC/USDT` |
-| WEB_DEPLOY    | If You Want Deploy This To Webhostings Set It To `true` else not set or set it `false` |
+| WEB_DEPLOY    | If You Want Deploy This To Webhostings (Like Free Backend Services) Set It To `true` else not set or set it `false` |
+| WEB_URL    | If You Set `WEB_DEPLOY=TRUE` Then You Should Enter The URL Of Ur Backend App For Example : `https://example.com` |
 
 ### Good Luck
