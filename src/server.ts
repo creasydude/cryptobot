@@ -3,7 +3,7 @@ import { getData, getMsgWs, startWs } from "./data-related/api";
 import crossEMA from "./data-related/calculate";
 import BotSendMsg from "./bot-related/telegram";
 import express, { Request, Response } from 'express';
-import request from "request";
+import axios from "axios";
 
 //Function To Send Msg (Limit Messages Bot Can Send 1 In 5 Mins)
 let lastMessageTime = 0;
@@ -24,13 +24,7 @@ function calculateFn(prices: string[]) {
 
 //Function To Keep Alive The App In Free Backend Services
 function keepAlive(appUrl: string) {
-  request(appUrl, function (error: any, response: any, body: any) {
-    if (!error) {
-      console.log("Keeping App Alive.");
-    } else {
-      console.log(error);
-    }
-  })
+  axios.get(appUrl).then(res => console.log(`Keep Alive Function Successfuly Executed. Status Code :${res.status}, Status Text : ${res.statusText}.`)).catch((err: any) => console.log(err))
 }
 
 //Function Of Start Application
