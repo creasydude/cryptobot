@@ -5,15 +5,20 @@ const botToken = TELEGRAM_BOT_TOKEN!;
 const ownerChatId = TELEGRAM_OWNER_CHAT_ID!;
 const TBot = new TelegramBot(botToken, { polling: true });
 
-let isBotActive = true;
+let isBotActive = false;
 
-function resetBotActive() {
-    isBotActive = true;
+function resetBotActive(mode: string) {
+    if (mode === "start") {
+        isBotActive = true;
+    } else if (mode === "stop") {
+        isBotActive = false;
+    }
 }
 
 TBot.onText(/\/start/, (msg) => {
-    if (isBotActive) {
+    if (!isBotActive) {
         TBot.sendMessage(ownerChatId, "You Started Bot Successfully. ASAP You Will Receive Your Signals.");
+        resetBotActive("start");
     } else {
         TBot.sendMessage(ownerChatId, "Bot is already active!");
     }
@@ -22,11 +27,10 @@ TBot.onText(/\/start/, (msg) => {
 TBot.onText(/\/stop/, (msg) => {
     if (isBotActive) {
         TBot.sendMessage(ownerChatId, "Bot activities stopped successfully.");
-        resetBotActive();
+        resetBotActive("stop");
     } else {
         TBot.sendMessage(ownerChatId, "Bot is already stopped.");
     }
-    isBotActive = false;
 });
 
 function BotSendMsg(message: string) {
