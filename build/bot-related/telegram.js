@@ -9,7 +9,8 @@ const botToken = env_1.TELEGRAM_BOT_TOKEN;
 const ownerChatId = env_1.TELEGRAM_OWNER_CHAT_ID;
 const TBot = new node_telegram_bot_api_1.default(botToken, { polling: true });
 TBot.onText(/\/start/, (msg) => {
-    const chatId = msg.chat.id;
+    // const chatId = msg.chat.id;
+    const chatId = ownerChatId;
     // Check if the bot is already started
     if (!isBotStarted(chatId)) {
         // Perform start action
@@ -43,26 +44,6 @@ function stopBot(chatId) {
 function isBotStarted(chatId) {
     return botState[chatId] || false;
 }
-// let isBotActive = false;
-// function resetBotActive(mode: string) {
-//     if (mode === "start") {
-//         isBotActive = true;
-//     } else if (mode === "stop") {
-//         isBotActive = false;
-//     }
-// }
-// TBot.onText(/\/start/, (msg) => {
-//     if (!isBotActive) {
-//         TBot.sendMessage(ownerChatId, "You Started Bot Successfully. ASAP You Will Receive Your Signals.");
-//         resetBotActive("start");
-//     }
-// });
-// TBot.onText(/\/stop/, (msg) => {
-//     if (isBotActive) {
-//         TBot.sendMessage(ownerChatId, "Bot activities stopped successfully.");
-//         resetBotActive("stop");
-//     }
-// });
 function BotSendMsg(message) {
     if (isBotStarted(ownerChatId)) {
         TBot.sendMessage(ownerChatId, message);
