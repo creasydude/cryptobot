@@ -19,8 +19,6 @@ TBot.onText(/\/start/, (msg) => {
     if (!isBotActive) {
         TBot.sendMessage(ownerChatId, "You Started Bot Successfully. ASAP You Will Receive Your Signals.");
         resetBotActive("start");
-    } else {
-        TBot.sendMessage(ownerChatId, "Bot is already active!");
     }
 });
 
@@ -28,8 +26,6 @@ TBot.onText(/\/stop/, (msg) => {
     if (isBotActive) {
         TBot.sendMessage(ownerChatId, "Bot activities stopped successfully.");
         resetBotActive("stop");
-    } else {
-        TBot.sendMessage(ownerChatId, "Bot is already stopped.");
     }
 });
 
