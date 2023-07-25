@@ -1,5 +1,8 @@
 # Crypto Signal Bot
 
+### Example
+[Example Image](./example.jpg "Example")
+
 ### Made With
 - Node.js
 - Typescript
