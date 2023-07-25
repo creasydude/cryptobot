@@ -1,7 +1,7 @@
 # Crypto Signal Bot
 
 ### Example
-[Example Image](./example.jpg "Example")
+![Example Image](example.jpg)
 
 ### Made With
 - Node.js
