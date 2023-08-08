@@ -43,5 +43,6 @@ In the `src` Folder It Is A File Names `env.ts` Just Edit It Or Install `dotenv`
 | CRYPTO_PAIR    | The Crypto Pair You Want Use Like Time Frame You Should Sync With API URL So I Use `BTC/USDT` |
 | WEB_DEPLOY    | If You Want Deploy This To Webhostings (Like Free Backend Services) Set It To `true` else not set or set it `false` |
 | WEB_URL    | If You Set `WEB_DEPLOY=TRUE` Then You Should Enter The URL Of Ur Backend App For Example : `https://example.com` |
+| WS_PORT    | Its A Port For WebSocket connection That Send Signals In Wss:// Protocol , Default is `8080` |
 
 ### Good Luck

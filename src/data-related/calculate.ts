@@ -1,4 +1,4 @@
-import { CRYPTO_PAIR , TIME_FRAME} from "../env";
+import { CRYPTO_PAIR, TIME_FRAME } from "../env";
 
 function calculateEMA(prices: string[] | number[], period: number, smoothing?: number) {
   //*Good Smoothing For MACD : 2
@@ -12,7 +12,7 @@ function calculateEMA(prices: string[] | number[], period: number, smoothing?: n
   //Add smoothing factor
   const multiplier = (smoothing || 2) / (period + 1);
 
-  const ema : any[] = [];
+  const ema: any[] = [];
   let emaPrev = numberPrices[0];
   ema.push(emaPrev);
 
@@ -52,7 +52,7 @@ function calculateMACD(prices: string[] | number[], longEMA?: number, shortEMA?:
   return roundedHistogram;
 }
 
-function crossEMA(prices: string[], botFn: Function, longEMA?: number, shortEMA?: number) {
+function crossEMA(prices: string[], botFn: Function, wsFn: Function, longEMA?: number, shortEMA?: number) {
   //Declare Signals And Get Last Price
   const signals = ["Buy", "Sell", "Nothing"]
   const priceLastOne = Number(prices[prices.length - 1]);
@@ -77,45 +77,50 @@ function crossEMA(prices: string[], botFn: Function, longEMA?: number, shortEMA?
   //Give Signal
   if (fastEMALastOne > slowEMALastOne && fastEMALastMinus < slowEMALastMinus && ema200LastOne < priceLastOne && macdLastOne > 0) {
     //Buy Signal
+    const wsData = {
+      signal: signals[0],
+      priceLastOne,
+      fastEMALastOne,
+      slowEMALastOne,
+      fastEMALastMinus,
+      slowEMALastMinus,
+      ema200LastOne,
+      macdLastOne
+    }
     const returnData = `🚀 ${signals[0]} Signal At ${priceLastOne} In ${CRYPTO_PAIR} Pair. ⚙️ More Details : Time Frame : ${TIME_FRAME} , Last Fast Ema : ${fastEMALastOne} , Last Slow Ema : ${slowEMALastOne}, Last 200 EMA : ${ema200LastOne}, Last MACD Histogram : ${macdLastOne}`;
     botFn(returnData);
-    // return {
-    //   signal: signals[0],
-    //   priceLastOne,
-    //   fastEMALastOne,
-    //   slowEMALastOne,
-    //   fastEMALastMinus,
-    //   slowEMALastMinus,
-    //   ema200LastOne,
-    //   macdLastOne
-    // }
+    wsFn(JSON.stringify(wsData));
+
   } else if (fastEMALastOne < slowEMALastOne && fastEMALastMinus > slowEMALastMinus && ema200LastOne > priceLastOne && macdLastOne < 0) {
     //Sell Signal
+    const wsData = {
+      signal: signals[1],
+      priceLastOne,
+      fastEMALastOne,
+      slowEMALastOne,
+      fastEMALastMinus,
+      slowEMALastMinus,
+      ema200LastOne,
+      macdLastOne
+    }
     const returnData = `🚀 ${signals[1]} Signal At ${priceLastOne} In ${CRYPTO_PAIR} Pair. ⚙️ More Details : Time Frame : ${TIME_FRAME} , Last Fast Ema : ${fastEMALastOne} , Last Slow Ema : ${slowEMALastOne}, Last 200 EMA : ${ema200LastOne}, Last MACD Histogram : ${macdLastOne}`;
     botFn(returnData);
-    // return {
-    //   signal: signals[1],
-    //   priceLastOne,
-    //   fastEMALastOne,
-    //   slowEMALastOne,
-    //   fastEMALastMinus,
-    //   slowEMALastMinus,
-    //   ema200LastOne,
-    //   macdLastOne
-    // }
+    wsFn(JSON.stringify(wsData));
+
   } else {
     //Nothing Signal
-    return null;
-    // return {
-    //   signal: signals[2],
-    //   priceLastOne,
-    //   fastEMALastOne,
-    //   slowEMALastOne,
-    //   fastEMALastMinus,
-    //   slowEMALastMinus,
-    //   ema200LastOne,
-    //   macdLastOne
-    // }
+    // return null;
+    const wsData = {
+      signal: signals[2],
+      priceLastOne,
+      fastEMALastOne,
+      slowEMALastOne,
+      fastEMALastMinus,
+      slowEMALastMinus,
+      ema200LastOne,
+      macdLastOne
+    }
+    wsFn(JSON.stringify(wsData));
   }
 }
 

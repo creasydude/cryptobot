@@ -5,6 +5,8 @@ import BotSendMsg from "./bot-related/telegram";
 import express, { Request, Response } from 'express';
 import axios from "axios";
 
+import wsFn from "./data-related/websocket";
+
 //Function To Send Msg (Limit Messages Bot Can Send 1 In 5 Mins)
 let lastMessageTime = 0;
 function botFn(message: string) {
@@ -19,7 +21,7 @@ function botFn(message: string) {
 
 //Calculate Function
 function calculateFn(prices: string[]) {
-  return crossEMA(prices, botFn);
+  return crossEMA(prices, botFn, wsFn);
 }
 
 //Function To Keep Alive The App In Free Backend Services
