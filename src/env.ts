@@ -13,3 +13,4 @@ export const CRYPTO_PAIR: string = <string>process.env.CRYPTO_PAIR
 export const WEB_DEPLOY: string = <string>process.env.WEB_DEPLOY
 export const WEB_URL: string = <string>process.env.WEB_URL
 export const WS_PORT: number = Number(process.env.WS_PORT)
+export const WS_SECURITY_KEY: string = <string>process.env.WS_SECURITY_KEY

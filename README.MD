@@ -44,5 +44,6 @@ In the `src` Folder It Is A File Names `env.ts` Just Edit It Or Install `dotenv`
 | WEB_DEPLOY    | If You Want Deploy This To Webhostings (Like Free Backend Services) Set It To `true` else not set or set it `false` |
 | WEB_URL    | If You Set `WEB_DEPLOY=TRUE` Then You Should Enter The URL Of Ur Backend App For Example : `https://example.com` |
 | WS_PORT    | Its A Port For WebSocket connection That Send Signals In Wss:// Protocol , Default is `8080` |
+| WS_SECURITY_KEY    | When You Want To Create New Connection Of Websocket To This App You Must Add This Security Key As Header In Your Request For Example : `const ws = new WebSocket(WS_SERVER_URL, {headers: {Authorization: WS_SECURITY_KEY}})` |
 
 ### Good Luck
