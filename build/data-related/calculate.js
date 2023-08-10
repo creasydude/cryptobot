@@ -41,7 +41,7 @@ function calculateMACD(prices, longEMA, shortEMA, signalEMA) {
     return roundedHistogram;
 }
 exports.calculateMACD = calculateMACD;
-function crossEMA(prices, botFn, longEMA, shortEMA) {
+function crossEMA(prices, botFn, wsFn, longEMA, shortEMA) {
     //Declare Signals And Get Last Price
     const signals = ["Buy", "Sell", "Nothing"];
     const priceLastOne = Number(prices[prices.length - 1]);
@@ -61,47 +61,50 @@ function crossEMA(prices, botFn, longEMA, shortEMA) {
     //Give Signal
     if (fastEMALastOne > slowEMALastOne && fastEMALastMinus < slowEMALastMinus && ema200LastOne < priceLastOne && macdLastOne > 0) {
         //Buy Signal
+        const wsData = {
+            signal: signals[0],
+            priceLastOne,
+            fastEMALastOne,
+            slowEMALastOne,
+            fastEMALastMinus,
+            slowEMALastMinus,
+            ema200LastOne,
+            macdLastOne
+        };
         const returnData = `🚀 ${signals[0]} Signal At ${priceLastOne} In ${env_1.CRYPTO_PAIR} Pair. ⚙️ More Details : Time Frame : ${env_1.TIME_FRAME} , Last Fast Ema : ${fastEMALastOne} , Last Slow Ema : ${slowEMALastOne}, Last 200 EMA : ${ema200LastOne}, Last MACD Histogram : ${macdLastOne}`;
         botFn(returnData);
-        // return {
-        //   signal: signals[0],
-        //   priceLastOne,
-        //   fastEMALastOne,
-        //   slowEMALastOne,
-        //   fastEMALastMinus,
-        //   slowEMALastMinus,
-        //   ema200LastOne,
-        //   macdLastOne
-        // }
+        wsFn(JSON.stringify(wsData));
     }
     else if (fastEMALastOne < slowEMALastOne && fastEMALastMinus > slowEMALastMinus && ema200LastOne > priceLastOne && macdLastOne < 0) {
         //Sell Signal
+        const wsData = {
+            signal: signals[1],
+            priceLastOne,
+            fastEMALastOne,
+            slowEMALastOne,
+            fastEMALastMinus,
+            slowEMALastMinus,
+            ema200LastOne,
+            macdLastOne
+        };
         const returnData = `🚀 ${signals[1]} Signal At ${priceLastOne} In ${env_1.CRYPTO_PAIR} Pair. ⚙️ More Details : Time Frame : ${env_1.TIME_FRAME} , Last Fast Ema : ${fastEMALastOne} , Last Slow Ema : ${slowEMALastOne}, Last 200 EMA : ${ema200LastOne}, Last MACD Histogram : ${macdLastOne}`;
         botFn(returnData);
-        // return {
-        //   signal: signals[1],
-        //   priceLastOne,
-        //   fastEMALastOne,
-        //   slowEMALastOne,
-        //   fastEMALastMinus,
-        //   slowEMALastMinus,
-        //   ema200LastOne,
-        //   macdLastOne
-        // }
+        wsFn(JSON.stringify(wsData));
     }
     else {
         //Nothing Signal
-        return null;
-        // return {
-        //   signal: signals[2],
-        //   priceLastOne,
-        //   fastEMALastOne,
-        //   slowEMALastOne,
-        //   fastEMALastMinus,
-        //   slowEMALastMinus,
-        //   ema200LastOne,
-        //   macdLastOne
-        // }
+        // return null;
+        const wsData = {
+            signal: signals[2],
+            priceLastOne,
+            fastEMALastOne,
+            slowEMALastOne,
+            fastEMALastMinus,
+            slowEMALastMinus,
+            ema200LastOne,
+            macdLastOne
+        };
+        wsFn(JSON.stringify(wsData));
     }
 }
 exports.crossEMA = crossEMA;

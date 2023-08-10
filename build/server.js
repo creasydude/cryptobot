@@ -18,6 +18,7 @@ const calculate_1 = __importDefault(require("./data-related/calculate"));
 const telegram_1 = __importDefault(require("./bot-related/telegram"));
 const express_1 = __importDefault(require("express"));
 const axios_1 = __importDefault(require("axios"));
+const websocket_1 = __importDefault(require("./data-related/websocket"));
 //Function To Send Msg (Limit Messages Bot Can Send 1 In 5 Mins)
 let lastMessageTime = 0;
 function botFn(message) {
@@ -30,7 +31,7 @@ function botFn(message) {
 }
 //Calculate Function
 function calculateFn(prices) {
-    return (0, calculate_1.default)(prices, botFn);
+    return (0, calculate_1.default)(prices, botFn, websocket_1.default);
 }
 //Function To Keep Alive The App In Free Backend Services
 function keepAlive(appUrl) {
